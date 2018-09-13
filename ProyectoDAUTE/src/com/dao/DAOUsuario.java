@@ -15,33 +15,6 @@ public class DAOUsuario implements Operaciones{
     Conexion db = new Conexion();
     Usuario user = new Usuario();
     
-    public int login(String user, String pass)
-    {
-        Connection con;
-        PreparedStatement pst;
-        ResultSet rs;
-        String sql = "select * from usuario where username='"+user+"' && pass='"+pass+"'";
-        int rol=2;
-        
-        try 
-        {
-            Class.forName(db.getDriver());
-            con = DriverManager.getConnection(db.getUrl(), db.getUser(), db.getPassword());
-            pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
-            
-            while(rs.next())
-            {
-                rol = rs.getInt("rol_id");
-            }
-            
-            return rol;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta"+e.getMessage(), "ERROR", 0);
-            return rol=5;
-        }
-    }
-    
     @Override
     public boolean insertar(Object obj) {
         user = (Usuario) obj;
